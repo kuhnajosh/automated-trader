@@ -6,3 +6,6 @@ Created on Feb 26, 2018
 '''
 
 #This is going to make us a lot of money because we're hackers
+
+def main():
+    main()
