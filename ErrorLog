@@ -1,0 +1,18 @@
+3/2/18 
+		7:28PM - T: 
+	Trying to fix an error for creating a class name, I am not sure if we need to design the
+	class within the same scope as the the main method. The CoinHandler class is coming up with 
+	This:  btc_handler = CoinHandler(product_id='BTC-USD')
+				NameError: name 'CoinHandler' is not defined
+	Attempting to fix it right now. 
+	
+		7:31PM - T: 
+	Fixed it, all methods and classes need to be before the main method call
+
+3/3/18
+		10:55AN - T:
+	Having an issue with the multithreading. When running the script, it seems that the first thread
+	that is called is the only one that is run. The infinite loop seems to block out the rest of the
+	threads. The issue may be with the infinite loop of the public client. This prevents any other
+	thread being run, even if the thread doesn't contain a call to the public client ticker.
+	 
