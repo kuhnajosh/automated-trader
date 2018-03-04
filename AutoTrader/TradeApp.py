@@ -24,7 +24,7 @@ import time
 
 import gdax
 
-import 
+from AutoTrader import TradeHandler, TradeSimulator
 
 
 class TradeApp():
@@ -51,27 +51,20 @@ class TradeApp():
         
         #create the traders
         for coin in self.coins:
-            self.traders.append(TradeHandler(coin,self.ledger[coin]))
-        
+            self.traders.append(TradeSimulator.TradeSimulator(coin,self.ledger[coin]))
+        print('something1')
         self.start()
     # Create a method that runs all of the calculations and trades here by running through the TradeHandler objects
     # Each coinhandler will have it's own worker thread so that each can do the calculations separately, allowing for
     # higher resolution and more on time trades.
     def start(self):
-        workers = []
-        
-        while True:
-            time.sleep(1)
-            for trader in self.traders:
-                workers.append(target=trader.check_for_trade())
-            
-            for worker in workers:
-                worker.start()
-         
-            for worker in workers:
-                worker.join()
-                
-            worker = []
+        print('something')
+        print(self.ledger['BTC-USD']['client'].get_product_historic_rates('BTC-USD',granularity=3600))
+#         while True:
+#             time.sleep(1)
+#             for trader in self.traders:
+#                 trader.check_for_trade()
+
     # Method to grab the price of the requested coin, will keep calling a new snapshot of the ledger
     # until price is in the ledger to prevent an exception from being thrown
     def get_latest_ticker(self, product_id):
@@ -92,13 +85,13 @@ class TradeApp():
         
 def main():
     handler = TradeApp()
-    while True:
-
-        # should use threads for these         
-        for product_id in handler.coins:           
-            print(product_id, handler.get_price(product_id))
-        
-        print("")
+#     while True:
+# 
+#         # should use threads for these         
+#         for product_id in handler.coins:           
+#             print(product_id, handler.get_price(product_id))
+#         
+#         print("")
 if __name__ == "__main__": main()
 
 

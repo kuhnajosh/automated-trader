@@ -11,21 +11,22 @@ multi-threading so each can do calculations independent of each other.
 @author: Josh Kuhn, Tyrus Sonneborn 
 '''    
 
-import time, gdax, threading, thread
+import time, gdax, threading
+from AutoTrader import DataHandler
 
 class TradeSimulator():
     
-    def __init__(self, product_id, subledger):
+    def __init__(self, product_id, subledger, capital=100000):
         self.product_id = product_id
         self.client = subledger['client']
         self.granularity = subledger['granularity']
-    
-    
+        self.capital = capital
+        self.data_handler = DataHandler.DataHandler(product_id=product_id,subledger=subledger)
+        self.bought_in = False 
     # This is the method for checking for trades, should potentially keep a boolean attribute to signify if we are 
     # in a buy or sell position
     def check_for_trade(self):
         # TODO: REPLACE WITH ACTUAL CALCULATIONS
-        time.sleep(0.2)
-        print(self.product_id, self.client.get_product_ticker(self.product_id))
-
+        pass
+        
         
