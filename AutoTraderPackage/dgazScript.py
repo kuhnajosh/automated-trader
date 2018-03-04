@@ -18,7 +18,7 @@ threading capabilities. Order of coins is: BTC, ETH, LTC, BCH
 
 @param granularity : pass in list granularity of the coins in seconds, default is 3600 seconds
 @param MA_period : pass in list of the moving average period in relation to granularity. IE:
-         if you want 10 hours in your moving average with a granularity of 3600 seconds, pass in 10
+         if you want 10 candlesticks in your moving average pass in 10
         
 @author: Josh Kuhn, Tyrus Sonneborn
 '''
@@ -30,7 +30,7 @@ class CoinHandler():
         self.clients = []
         
         # Create multiple clients to increase resolution of the calls, assigning
-        # a new client to each coin
+        # a new client to each coinA
         for i in range(0, 4):
             self.clients.append(gdax.PublicClient())
         
@@ -55,12 +55,18 @@ class CoinHandler():
     def start(self):
         workers = []
         
+        while True:
+            time.sleep(1)
+            for trader in self.traders:
+                workers.append(target=trader.check_for_trade())
+            
+            for worker in workers:
+                worker.start()
          
-        
-        
-    
-    
-           
+            for worker in workers:
+                worker.join()
+                
+            worker = []
     # Method to grab the price of the requested coin, will keep calling a new snapshot of the ledger
     # until price is in the ledger to prevent an exception from being thrown
     def get_latest_ticker(self, product_id):
