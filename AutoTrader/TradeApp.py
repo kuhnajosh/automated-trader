@@ -24,7 +24,7 @@ import time
 
 import gdax
 
-from AutoTrader import TradeHandler, TradeSimulator
+import TradeHandler, TradeSimulator
 
 
 class TradeApp():
