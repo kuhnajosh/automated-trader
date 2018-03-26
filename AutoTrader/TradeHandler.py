@@ -15,7 +15,7 @@ multi-threading so each can do calculations independent of each other.
 '''    
 
 import time, gdax, threading
-import AutoTrader.DataHandler as DataHandler
+import AutoTrader.DataHandler as dh
 
 
 class TradeHandler():

@@ -24,7 +24,7 @@ import time
 
 import gdax
 
-import AutoTrader.TradeHandler as TradeHandler, AutoTrader.TradeSimulator as TradeSimulator
+import AutoTrader.TradeHandler as th, AutoTrader.TradeSimulator as ts
 
 
 
@@ -52,7 +52,7 @@ class TradeApp():
         
         #create the traders
         for coin in self.coins:
-            self.traders.append(TradeSimulator(coin,self.ledger[coin]))
+            self.traders.append(ts.TradeSimulator(coin,self.ledger[coin]))
         print('something1')
         self.start()
     # Create a method that runs all of the calculations and trades here by running through the TradeHandler objects
@@ -85,6 +85,7 @@ class TradeApp():
 
         
 def main():
+    print('something')
     handler = TradeApp()
 #     while True:
 # 
